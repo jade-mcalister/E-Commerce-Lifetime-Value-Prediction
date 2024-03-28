@@ -1,6 +1,5 @@
 from sklearn.model_selection import train_test_split
 import pandas as pd
-import plotly.express as px
 
 # reads csv file
 user_data = pd.read_csv(
@@ -45,4 +44,5 @@ y = user_data['CLV']  # Target
 # splits data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1111)
 
-print(user_data['CLV'])
+print(user_data)
+

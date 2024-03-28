@@ -3,7 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn import datasets
 from sklearn.metrics import mean_squared_error
 import numpy as np
-from Main import X_train, X_test, y_train, y_test
+
+from Main import X_train
 
 class DNN:
     def __init__(self, learning_rate=0.01):
@@ -13,12 +14,12 @@ class DNN:
 
         # initialize layers
 
-    #6 input neurons, 5 hidden neurons (h1), 3 hidden neurons, one output neuron
+    #10 input neurons, 5 hidden neurons (h1), 3 hidden neurons (h2), 1 output neuron
     input_neurons = X_train.shape[1]
     h1_neurons = 5
     h2_neurons = 3
     output_neuron = 1
-
+    
     # sigmoid function
     def sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
@@ -47,3 +48,4 @@ class DNN:
         output_layer_input = np.dot(h2_output, weights_h2_output) + biases_h2_output  #using output from h2
         output = self.sigmoid(output_layer_input)  # implement sigmoid function
 
+        print(output)
