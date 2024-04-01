@@ -16,37 +16,36 @@ user_data['churn'] = user_data['churn'].replace({'No': '0', 'Yes': '1'})
 dummy_data = pd.get_dummies(user_data)
 
 # Calculate average cost per order
-# user_data['avg_order_value'] = user_data['total_spent']/user_data['items_purchased']
+user_data['avg_charge'] = user_data['totalcharges']/user_data['monthlycharges']
 
 # Calculate Purchase Frequency
-# purchase_frequency = (user_data[user_data.items_purchased > 1].shape[0]/user_data.shape[0])
-# Repeat Rate
+purchase_frequency = (user_data[user_data.avg_charge > 1].shape[0]/user_data.shape[0])
 
-# Calculate Repeat Rate (looks like our repeat rate is 100% in this dataset)
-# repeat_rate=user_data[user_data.items_purchased > 1].shape[0]/user_data.shape[0]
+# Calculate Churn Rate
+churn_rate = user_data[user_data.churn == 1].sum()/len(user_data)
 
-# Calculate Churn Rate (this would be zero, so I added a few decimals to make this number divisible)
-# churn_rate = 1.0001 - repeat_rate
+# Calculate Repeat Rate
+#repeat_rate = 1 - churn_rate
 
 # Calculate Profit Margin (est. 5% profit)
-# user_data['profit_margin'] = user_data['total_spent']*0.05
+#user_data['profit_margin'] = user_data['total_spent']*0.05
 
 # Calculate CLV
-# user_data['customer_value'] = user_data['avg_order_value']*purchase_frequency/churn_rate
+#user_data['customer_value'] = user_data['avg_order_value']*purchase_frequency/churn_rate
 
 
-# user_data['CLV'] = user_data['customer_value']*user_data['profit_margin']
+#user_data['CLV'] = user_data['customer_value']*user_data['profit_margin']
 # define X features (everything except churn) and y targets (churn)
-y = dummy_data.churn.values
-X = dummy_data.drop('churn', axis = 1)
+# y = dummy_data.churn.values
+# X = dummy_data.drop('churn', axis = 1)
 # saves dataframe column titles to list
-columns = X.columns
+#columns = X.columns
 
 # instantiate a Min-Max scaling object
-minmax = MinMaxScaler()
+#minmax = MinMaxScaler()
 # Fit and transform our feature data into a pandas dataframe
-X = pd.DataFrame(minmax.fit_transform(X))
+#X = pd.DataFrame(minmax.fit_transform(X))
 # splits data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1111)
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1111)
 
-print(user_data.churn)
+print(churn_rate)
